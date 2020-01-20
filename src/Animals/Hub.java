@@ -30,7 +30,7 @@ class Hub {
                     selectAnimal();
                     break;
                 case "2":
-                    startDay();
+                    someDayInLife(1);
                     break;
                 case "3":
                     printAllAnimals(1);
@@ -61,12 +61,6 @@ class Hub {
         }
     }
 
-    //method called in the menu when selecting the alternative to start counting days.
-    private void startDay() {
-        System.out.println("What day would you like to start at ");
-        int currentDay = sc.nextInt();
-        someDayInLife(currentDay);
-    }
     //print out all the animals in the animal arrays on command
     private void printAllAnimals(int returnToMenu) {
         for (Dog dog : dogs) {
@@ -105,10 +99,6 @@ class Hub {
 
     private void someDayInLife(int currentDay) {
         while (true) {
-            System.out.println("Day: " + currentDay);
-            if (currentDay >= daysInYear) {
-                year++;
-            }
 
             System.out.println("Current year: " + year + "\n");
             printAllAnimals(0);
@@ -121,28 +111,19 @@ class Hub {
                     dog.age++;
                 }
                 if (dog.getAge() >= 15) {
-                    System.out.println(dog.getName() + " Has died by natural causes\n");
+                    System.out.println(dog.getName() + " Has died of natural causes\n");
                     dogs.remove(dog);
-                } else {
-                    if (!dog.chewToy) {
-                        dog.newChewToy();
-                    }
-                    dog.checkChewToy();
                 }
 
                 for (Elephant elephant : elephants) {
-                    elephant.age++;
                     if (elephant.getAge() >= 70) {
-                        System.out.println(elephant.getName() + " Has died by natural causes\n");
+                        System.out.println(elephant.getName() + " Has died of natural causes\n");
                         elephants.remove(elephant);
                     }
 
                     for (Parrot parrot : parrots) {
-                        if (currentDay >= daysInYear) {
-                            parrot.age++;
                             if (parrot.getAge() >= 95) {
-                                System.out.println(parrot.getName() + " Has died by natural causes\n");
-
+                                System.out.println(parrot.getName() + " Has died of natural causes\n");
                                 parrots.remove(parrot);
                             }
                         }
@@ -151,7 +132,6 @@ class Hub {
                 }
             }
         }
-    }
     private void aDogsLife() {
         System.out.println("What name do you want to give the dog");
         Dog myDog = new Dog();
