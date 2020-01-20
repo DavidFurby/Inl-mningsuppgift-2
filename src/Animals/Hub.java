@@ -1,152 +1,22 @@
 package Animals;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class Hub {
+class Hub {
 
-    boolean advanceDays;
-    Scanner sc = new Scanner(System.in);
-    int tallestDog, year, daysInYear;
+    private Scanner sc = new Scanner(System.in);
+    private int year;
+    private int daysInYear = 365;
+
     //Created three ArrayList to hold an unlimited amount of different animals
-    private List<Dog> Dogs = new ArrayList<>();
-    private List<Elephant> Elephants = new ArrayList<>();
-    private List<Parrot> Parrots = new ArrayList<>();
-
-
-    public Hub() {
-        System.out.println("Poopedy");
+    private List<Dog> dogs = new ArrayList<>();
+    private List<Elephant> elephants = new ArrayList<>();
+    private List<Parrot> parrots = new ArrayList<>();
+    Hub() {
+        System.out.println("Start");
         menu();
-    }
-//method called in the menu when selecting the alternative to start counting days.
-    private void startDay() {
-        System.out.println("What day would you like to start at ");
-        int currentDay = sc.nextInt();
-        someDayInLife(currentDay);
-    }
-
-/*tried to get the day-system to work, but we don´t know how to specify specific days during the arrays loop where the
-* functions will activate on repeat*/
-    private void someDayInLife(int currentDay) {
-        advanceDays = true;
-        daysInYear = 365;
-        while (advanceDays) {
-            System.out.println("Day: " + currentDay);
-            if (currentDay >= daysInYear) {
-                year++;
-            }
-
-            System.out.println("Current year: " + year + "\n");
-            printAllAnimals(0);
-            System.out.println("How many days would you like to advance?");
-            int howManyDays = sc.nextInt();
-            currentDay += howManyDays;
-
-            for (Dog dog : Dogs) {
-                if (dog.getAge() >= 15) {
-                    System.out.println(dog.getName() + " Has died\n");
-                    Dogs.remove(dog);
-                } else {
-                    if (!dog.chewToy) {
-                        dog.newChewToy();
-                    }
-                    dog.checkChewToy();
-                }
-
-                for (Elephant elephant : Elephants) {
-                    elephant.age++;
-                    if (elephant.getAge() >= 70) {
-                        System.out.println(elephant.getName() + " Has died\n");
-                        Elephants.remove(elephant);
-                    }
-
-                    for (Parrot parrot : Parrots) {
-                        parrot.age++;
-                        if (parrot.getAge() > 70) {
-                            Parrots.remove(this);
-                        }
-                    }
-                    someDayInLife(currentDay);
-                }
-            }
-        }
-    }
-//Create the animal-object and insert it into the specified ArrayList
-    private void anElephantsLife() {
-        System.out.println("What name do you want to give to the elephant?");
-        Elephant myElephant = new Elephant();
-        System.out.println("Your " + myElephant.animal + "s name is: " + myElephant.name);
-        System.out.println(myElephant.AnimalVariables);
-        addAnimals(myElephant);
-        menu();
-    }
-
-    private void aParrotsLife() {
-        System.out.println("What name do you want to give to the parrot?");
-        Parrot myParrot = new Parrot();
-        System.out.println("Your " + myParrot.animal + "s name is: " + myParrot.name);
-        System.out.println(myParrot.AnimalVariables);
-        addAnimals(myParrot);
-        menu();
-    }
-
-
-    private void aDogsLife() {
-        System.out.println("What name do you want to give the dog");
-        Dog myDog = new Dog();
-        System.out.println("Your " + myDog.animal + "s name is: " + myDog.name);
-        System.out.println(myDog.AnimalVariables);
-        addAnimals(myDog);
-        menu();
-    }
-
-    public void addAnimals(Animal animal) { //expects input in form of an animal
-        if (animal.animal == "Dog") {
-            Dogs.add((Dog) animal);
-        } else if (animal.animal == "Elephant") {
-            Elephants.add((Elephant) animal);
-        } else if (animal.animal == "Parrot") {
-            Parrots.add((Parrot) animal);
-        }
-    }
-//print out all the animals in the animal arrays on command
-    public void printAllAnimals(int returnToMenu) {
-        for(int i = 0; i < Dogs.size(); i++) {
-            if(Dogs.size() == 0) {
-                System.out.println("There are no dogs here!");
-            } else {
-                System.out.println("Animal type: " + Dogs.get(i).animal);
-                System.out.println("Name: " + Dogs.get(i).getName());
-                System.out.println("Age:" + Dogs.get(i).getAge());
-                System.out.println("Animal sound " + Dogs.get(i).makeSound() + "\n");
-            }
-        }
-
-        for(int i = 0; i < Elephants.size(); i++) {
-            if(Elephants.size() == 0) {
-                System.out.println("There are no elephants here!");
-            } else {
-                System.out.println("Animal type: " + Elephants.get(i).animal);
-                System.out.println("Name: " + Elephants.get(i).getName());
-                System.out.println("Age: " + Elephants.get(i).getAge());
-                System.out.println("Animal sound " + Elephants.get(i).makeSound() + "\n");
-            }
-        }
-
-        for(int i = 0; i < Parrots.size(); i++) {
-            if(Parrots.size() == 0) {
-                System.out.println("There are no elephants here!");
-            } else {
-                System.out.println("Animal type: " + Parrots.get(i).animal);
-                System.out.println("Name: " + Parrots.get(i).getName());
-                System.out.println("Age: " + Parrots.get(i).getAge());
-                System.out.println("Animal sound: " + Parrots.get(i).makeSound() + "\n");
-            }
-        }
-        if (returnToMenu == 1)
-        {
-            menu();
-        }
     }
 
     private void menu() {
@@ -166,7 +36,7 @@ public class Hub {
                     printAllAnimals(1);
                     break;
                 case "4":
-                    Exit();
+                    exit();
             }
         }
     }
@@ -190,20 +60,137 @@ public class Hub {
             }
         }
     }
-    /*didn't find time to work this part into the project, since we spent mostly all our time trying to make the
-    days-counting system to work */
 
-    private void compareAnimals(){
-        for (int dog1 = 0; dog1 < Dogs.size(); dog1++) {
-            for (int dog2 = 0; dog2 < Dogs.size(); dog2++) {
-                if(Dogs.get(dog1).height > Dogs.get(dog2).height) {
-                    tallestDog = dog1;
+    //method called in the menu when selecting the alternative to start counting days.
+    private void startDay() {
+        System.out.println("What day would you like to start at ");
+        int currentDay = sc.nextInt();
+        someDayInLife(currentDay);
+    }
+    //print out all the animals in the animal arrays on command
+    private void printAllAnimals(int returnToMenu) {
+        for (Dog dog : dogs) {
+            System.out.println("Animal type: " + dog.animal);
+            System.out.println("Name: " + dog.getName());
+            System.out.println("Age:" + dog.getAge());
+            System.out.println("Animal sound " + dog.sound + "\n");
+        }
+
+        for (Elephant elephant : elephants) {
+            System.out.println("Animal type: " + elephant.animal);
+            System.out.println("Name: " + elephant.getName());
+            System.out.println("Age: " + elephant.getAge());
+            System.out.println("Animal sound " + elephant.sound + "\n");
+        }
+
+        for (Parrot parrot : parrots) {
+            System.out.println("Animal type: " + parrot.animal);
+            System.out.println("Name: " + parrot.getName());
+            System.out.println("Age: " + parrot.getAge());
+            System.out.println("Animal sound: " + parrot.sound + "\n");
+        }
+        if (returnToMenu == 1)
+        {
+            menu();
+        }
+    }
+
+    private void exit() {
+        System.out.println("Okay. Bye then");
+        System.exit(0);
+    }
+
+/*tried to get the day-system to work, but we don´t know how to specify specific days during the arrays loop where the
+* functions will activate on repeat*/
+
+    private void someDayInLife(int currentDay) {
+        while (true) {
+            System.out.println("Day: " + currentDay);
+            if (currentDay >= daysInYear) {
+                year++;
+            }
+
+            System.out.println("Current year: " + year + "\n");
+            printAllAnimals(0);
+            System.out.println("How many days would you like to advance?");
+            int howManyDays = sc.nextInt();
+            currentDay += howManyDays;
+
+            for (Dog dog : dogs) {
+                if (currentDay >= daysInYear) {
+                    dog.age++;
+                }
+                if (dog.getAge() >= 15) {
+                    System.out.println(dog.getName() + " Has died by natural causes\n");
+                    dogs.remove(dog);
+                } else {
+                    if (!dog.chewToy) {
+                        dog.newChewToy();
+                    }
+                    dog.checkChewToy();
+                }
+
+                for (Elephant elephant : elephants) {
+                    elephant.age++;
+                    if (elephant.getAge() >= 70) {
+                        System.out.println(elephant.getName() + " Has died by natural causes\n");
+                        elephants.remove(elephant);
+                    }
+
+                    for (Parrot parrot : parrots) {
+                        if (currentDay >= daysInYear) {
+                            parrot.age++;
+                            if (parrot.getAge() >= 95) {
+                                System.out.println(parrot.getName() + " Has died by natural causes\n");
+
+                                parrots.remove(parrot);
+                            }
+                        }
+                    }
+                    someDayInLife(currentDay);
                 }
             }
         }
     }
-    private void Exit() {
-        System.out.println("Okay. Bye then");
-        System.exit(0);
+    private void aDogsLife() {
+        System.out.println("What name do you want to give the dog");
+        Dog myDog = new Dog();
+        System.out.println("Your " + myDog.animal + "s name is: " + myDog.name);
+        System.out.println(myDog.AnimalVariables);
+        addAnimals(myDog);
+        menu();
+    }
+    private void aParrotsLife() {
+        System.out.println("What name do you want to give to the parrot?");
+        Parrot myParrot = new Parrot();
+        System.out.println("Your " + myParrot.animal + "s name is: " + myParrot.name);
+        System.out.println(myParrot.AnimalVariables);
+        addAnimals(myParrot);
+        menu();
+    }
+
+    //Create the animal-object and insert it into the specified ArrayList
+    private void anElephantsLife() {
+        System.out.println("What name do you want to give to the elephant?");
+        Elephant myElephant = new Elephant();
+        System.out.println("Your " + myElephant.animal + "s name is: " + myElephant.name);
+        System.out.println(myElephant.AnimalVariables);
+        addAnimals(myElephant);
+        menu();
+    }
+
+
+    private void addAnimals(Animal animal) { //expects input in form of an animal
+        switch (animal.animal) {
+            case "Dog":
+                dogs.add((Dog) animal);
+                break;
+            case "Elephant":
+                elephants.add((Elephant) animal);
+                break;
+            case "Parrot":
+                parrots.add((Parrot) animal);
+                break;
+        }
     }
 }
