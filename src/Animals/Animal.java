@@ -2,30 +2,32 @@ package Animals;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 //Animal class as parent
 abstract class Animal {
-    //Create reusable variables for the animals
     String animal;
     String sound;
     String name;
     private double weight;
     private double height;
     private int eat;
-    int age;
+    private int age;
     boolean flying;
     boolean bathed;
     private String foodType;
+    private boolean hasFood;
+    private int maxAge;
+    private int food;
+    private DecimalFormat df = new DecimalFormat("0.00");
+
+
     //Created an ArrayList with all the variables needed to describe the animals
     ArrayList<Object> AnimalVariables;
+
+
     void printValue() {
         AnimalVariables = new ArrayList<>();
-        /*called a method that controls the amount of decimals that are show when the variable is presented. In this
-        case only two decimals will be shown */
-
-        DecimalFormat df = new DecimalFormat("0.00");
         AnimalVariables.add("Animal: " + animal);
         AnimalVariables.add("Animal sound " + sound);
         AnimalVariables.add("Weight " + df.format(weight) + " kilo");
@@ -34,18 +36,15 @@ abstract class Animal {
         AnimalVariables.add("Age: " + age);
     }
 
-    public void getAnimalName(String animal) {
+    void getAnimalName(String animal) {
         this.animal = animal;
     }
+
     //method to create sound
-    public void getSound(String sound) {
+    void getSound(String sound) {
         this.sound = sound;
     }
-    //method to give name
-    void giveName() {
-        Scanner sc = new Scanner(System.in);
-        name = sc.next();
-    }
+
     //returns the already assigned name on command
     String getName() {
         return name;
@@ -56,32 +55,64 @@ abstract class Animal {
         return age;
     }
 
-    //give the animal-age
-    public void randomAge (int maxAge, int minAge) {
-        int rangeAge = maxAge - minAge;
-            age = (int) (Math.random() * rangeAge) + minAge;
-        }
-
-    public void randomFoodConsumption(int maxFood, int minFood) {
-        int rangeFood = maxFood - minFood;
-            eat = (int) (Math.random() * rangeFood) + minFood;
-        }
-
-    public void getFoodType(String foodType) {
+    void getFoodType(String foodType) {
         this.foodType = foodType;
     }
-    public void randomHeight(double maxHeight, double minHeight) {
-        double rangeHeight = (maxHeight - minHeight + 1);
-            height = ((Math.random() * rangeHeight) + minHeight);
-        }
 
-    public void randomWeight (double maxWeight,double minWeight) {
-        double rangeWeight = maxWeight - minWeight + 1;
-            weight = ((Math.random() * rangeWeight) + minWeight);
+    //method to give name
+    void giveName() {
+        Scanner sc = new Scanner(System.in);
+        name = sc.next();
+    }
+
+    //give the animal-age
+    void randomAge(int maxAge) {
+        this.maxAge = maxAge;
+        int rangeAge = maxAge - 1;
+        age = (int) (Math.random() * rangeAge) + 1;
+    }
+    void hasAged() {
+        age++;
+        System.out.println(name + " Has turned " + age + " years old");
+    }
+    boolean hasDied() {
+        if (age == maxAge) {
+            System.out.println(name + " has died from natural causes ");
+            return true;
         }
-   public void moreFood(int bound){
-        Random rand = new Random();
-         int food = rand.nextInt(bound);
-        food += 1;
+        return false;
+    }
+    void getFood(int food) {
+        this.food = food;
+    }
+    void doesHasFood() {
+        if (food <= 0) {
+            System.out.println(name + " does not have any food left");
+            hasFood = false;
+        }
+        hasFood = true;
+    }
+    void randomFoodConsumption(int maxFood, int minFood) {
+        int rangeFood = maxFood - minFood;
+        eat = (int) (Math.random() * rangeFood) + minFood;
+    }
+    void hasEaten() {
+        if (hasFood = true) {
+            int foodLeft = food - eat;
+            food = foodLeft;
+            System.out.println(name + " has eaten " + eat + " units of " + foodType + ", and has " + foodLeft + " units of " + foodType + " left");
+        }
+        if (hasFood = false) {
+            System.out.println("");
+        }
+    }
+    void randomHeight(double maxHeight, double minHeight) {
+        double rangeHeight = (maxHeight - minHeight + 1);
+        height = ((Math.random() * rangeHeight) + minHeight);
+    }
+
+    void randomWeight(double maxWeight, double minWeight) {
+        double rangeWeight = maxWeight - minWeight + 1;
+        weight = ((Math.random() * rangeWeight) + minWeight);
     }
 }

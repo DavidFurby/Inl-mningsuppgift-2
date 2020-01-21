@@ -7,13 +7,13 @@ import java.util.Scanner;
 class Hub {
 
     private Scanner sc = new Scanner(System.in);
-    private int year;
-    private int daysInYear = 365;
 
     //Created three ArrayList to hold an unlimited amount of different animals
     private List<Dog> dogs = new ArrayList<>();
     private List<Elephant> elephants = new ArrayList<>();
     private List<Parrot> parrots = new ArrayList<>();
+    private int years;
+
     Hub() {
         System.out.println("Start");
         menu();
@@ -99,31 +99,40 @@ class Hub {
 
     private void someDayInLife(int currentDay) {
         while (true) {
-
-            System.out.println("Current year: " + year + "\n");
+            int daysInYear = 365;
+            if (currentDay <= daysInYear) {
+                years++;
+            }
+            System.out.println("Current year: " + years);
+            System.out.println("Current day: " + currentDay + "\n");
             printAllAnimals(0);
-            System.out.println("How many days would you like to advance?");
-            int howManyDays = sc.nextInt();
-            currentDay += howManyDays;
+            System.out.println("would you like to continue? Type 1 if yes. 2 if no");
+            int toContinue = sc.nextInt();
+            if (toContinue == 1) {
+                System.out.println("How many days would you like to advance?");
+                int howManyDays = sc.nextInt();
+                currentDay += howManyDays;
 
-            for (Dog dog : dogs) {
-                if (currentDay >= daysInYear) {
-                    dog.age++;
-                }
-                if (dog.getAge() >= 15) {
-                    System.out.println(dog.getName() + " Has died of natural causes\n");
-                    dogs.remove(dog);
-                }
-
-                for (Elephant elephant : elephants) {
-                    if (elephant.getAge() >= 70) {
-                        System.out.println(elephant.getName() + " Has died of natural causes\n");
-                        elephants.remove(elephant);
+                for (Dog dog : dogs) {
+                    dog.hasEaten();
+                    if (currentDay >= daysInYear) {
+                        dog.hasAged();
                     }
-
-                    for (Parrot parrot : parrots) {
-                            if (parrot.getAge() >= 95) {
-                                System.out.println(parrot.getName() + " Has died of natural causes\n");
+                    if (dog.hasDied()) {
+                        dogs.remove(dog);
+                    }
+                    for (Elephant elephant : elephants) {
+                        if (currentDay >= daysInYear) {
+                            elephant.hasAged();
+                        }
+                        if (elephant.hasDied()) {
+                            elephants.remove(elephant);
+                        }
+                        for (Parrot parrot : parrots) {
+                            if (currentDay >= daysInYear) {
+                                parrot.hasAged();
+                            }
+                            if (parrot.hasDied()) {
                                 parrots.remove(parrot);
                             }
                         }
@@ -131,7 +140,12 @@ class Hub {
                     someDayInLife(currentDay);
                 }
             }
+            if (toContinue == 2) {
+                menu();
+                break;
+            }
         }
+    }
     private void aDogsLife() {
         System.out.println("What name do you want to give the dog");
         Dog myDog = new Dog();

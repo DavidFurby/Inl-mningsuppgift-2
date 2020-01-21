@@ -8,38 +8,15 @@ class Parrot extends Animal {
         getAnimalName("Parrot");
         getSound("SQWACK!");
         giveName();
-        randomAge(95, 1);
-        randomFoodConsumption(7, 12);
+        randomAge(95);
+        getFood(20);
+        doesHasFood();
+        randomFoodConsumption(12, 7);
         getFoodType("seeds");
         randomHeight(2, 0.5);
         randomWeight(4, 0.5);
         printValue();
-        moreFood(30);
-    }
-
-    @Override
-    public void randomAge(int maxAge, int minAge) {
-        super.randomAge(maxAge, minAge);
-    }
-
-    @Override
-    public void randomFoodConsumption(int maxFood, int minFood) {
-        super.randomFoodConsumption(maxFood, minFood);
-    }
-
-    @Override
-    public void getFoodType(String foodType) {
-        super.getFoodType(foodType);
-    }
-
-    @Override
-    public void randomHeight(double maxHeight, double minHeight) {
-        super.randomHeight(maxHeight, minHeight);
-    }
-
-    @Override
-    public void randomWeight(double maxWeight, double minWeight) {
-        super.randomWeight(maxWeight, minWeight);
+        moreSeeds();
     }
 
     void fly() {
@@ -51,9 +28,9 @@ class Parrot extends Animal {
         flying = false;
         System.out.println(name + " won't get to fly today");
     }
-
-    @Override
-    public void moreFood(int bound) {
-        super.moreFood(bound);
+    private void moreSeeds(){
+        Random rand = new Random();
+        int food = rand.nextInt(30);
+        food += 1;
     }
 }

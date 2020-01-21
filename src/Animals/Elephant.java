@@ -8,13 +8,13 @@ class Elephant extends Animal {
         getAnimalName("Elephant");
         getSound("PFFFPPFFF!");
         giveName();
-        randomAge(70, 1);
-        randomAge(15, 1);
+        randomAge(70);
+        getFood(100);
         randomFoodConsumption(70, 1);
         getFoodType("Bananas");
         randomHeight(4, 2);
         randomWeight(7000, 3000);
-        moreFood(100);
+        moreBananas();
         printValue();
     }
 
@@ -25,5 +25,10 @@ class Elephant extends Animal {
         else {
             System.out.println(name + " won't bathe today");
         }
+    }
+    private void moreBananas(){
+        Random rand = new Random();
+        int food = rand.nextInt(100);
+        food += 1;
     }
 }
