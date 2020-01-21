@@ -3,70 +3,57 @@ package Animals;
 import java.util.Random;
 
 //Parrot class that will inherit from Animal
-public class Parrot extends Animal {
-    public Parrot() {
-        animal = "Parrot";
-        sound = "Squawk!";
-        foodName = "units of seeds";
+class Parrot extends Animal {
+    Parrot() {
+        getAnimalName("Parrot");
+        getSound("SQWACK!");
         giveName();
-        randomAgeParrot();
-        randomWeightParrot();
-        randomHeightParrot();
-        randomFoodConsumptionParrot();
+        randomAge(95, 1);
+        randomFoodConsumption(7, 12);
+        getFoodType("seeds");
+        randomHeight(2, 0.5);
+        randomWeight(4, 0.5);
         printValue();
+        moreFood(30);
     }
 
-    private void randomFoodConsumptionParrot() {
-        int maxFood = 12;
-        int minFood = 7;
-        int rangeFood = maxFood - minFood;
-        for (int i = 0; i < 1; i++) {
-            eat = (int) (Math.random() * rangeFood) + minFood;
-            break;
-        }
+    @Override
+    public void randomAge(int maxAge, int minAge) {
+        super.randomAge(maxAge, minAge);
     }
 
-    private void randomHeightParrot () {
-        double maxHeight = 2;
-        double minHeight = 0.5;
-        double rangeHeight = (maxHeight - minHeight + 1);
-        for (double i = 0; i < 1; i++) {
-            height = ((Math.random() * rangeHeight) + minHeight);
-            break;
-        }
+    @Override
+    public void randomFoodConsumption(int maxFood, int minFood) {
+        super.randomFoodConsumption(maxFood, minFood);
     }
 
-    private void randomWeightParrot () {
-        double maxWeight = 1;
-        double minWeight = 0.5;
-        double rangeWeight = maxWeight - minWeight + 1;
-        for (int i = 0; i < 1; i++) {
-            weight = ((Math.random() * rangeWeight) + minWeight);
-            break;
-        }
+    @Override
+    public void getFoodType(String foodType) {
+        super.getFoodType(foodType);
     }
 
-    private void randomAgeParrot () {
-        int maxAge = 95;
-        int minAge = 1;
-        int rangeAge = maxAge - minAge;
-        for (int i = 0; i < 1; i++) {
-            age = (int) (Math.random() * rangeAge) + minAge;
-            break;
-        }
+    @Override
+    public void randomHeight(double maxHeight, double minHeight) {
+        super.randomHeight(maxHeight, minHeight);
     }
+
+    @Override
+    public void randomWeight(double maxWeight, double minWeight) {
+        super.randomWeight(maxWeight, minWeight);
+    }
+
     void fly() {
         flying = true;
         System.out.println(name + " will get to fly today!");
     }
+
     void land() {
         flying = false;
         System.out.println(name + " won't get to fly today");
     }
 
-    void moreSeeds(){
-        Random rand = new Random();
-        int seeds = rand.nextInt(30);
-        seeds += 1;
+    @Override
+    public void moreFood(int bound) {
+        super.moreFood(bound);
     }
 }
