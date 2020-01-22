@@ -14,6 +14,7 @@ abstract class Animal {
     private double height;
     private int eat;
     private int age;
+    private int ageInDays;
     boolean flying;
     boolean bathed;
     private String foodType;
@@ -21,6 +22,7 @@ abstract class Animal {
     private int food;
     private boolean death;
     private int refillFood;
+    private int remainingFood;
     private DecimalFormat df = new DecimalFormat("0.00");
 
 
@@ -36,6 +38,7 @@ abstract class Animal {
         AnimalVariables.add("Height " + df.format(height) + " meters");
         AnimalVariables.add("total food consumption per day: " + eat + " units of " + foodType);
         AnimalVariables.add("Age: " + age);
+        AnimalVariables.add("Age in Days: " + ageInDays + "\n");
     }
 
     void getAnimalName(String animal) {
@@ -56,6 +59,9 @@ abstract class Animal {
     int getAge() {
         return age;
     }
+    int getAgeInDays() {
+        return ageInDays;
+    }
 
     void setFoodType(String foodType) {
         this.foodType = foodType;
@@ -74,7 +80,9 @@ abstract class Animal {
         this.maxAge = maxAge;
         int rangeAge = maxAge - 1;
         age = (int) (Math.random() * rangeAge) + 1;
+        ageInDays = age * 365;
     }
+
     void hasAged() {
         age++;
         System.out.println(name + " Has turned " + age + " years old");
@@ -82,14 +90,6 @@ abstract class Animal {
     boolean hasDiedOfAge() {
         if (age == maxAge) {
             System.out.println(name + " has died from natural causes ");
-            return true;
-        }
-        return false;
-    }
-
-    boolean hasDiedOfStarvation() {
-        if (hasEaten()) {
-            System.out.println(name +  "has died from starvation");
             return true;
         }
         return false;
@@ -106,25 +106,21 @@ abstract class Animal {
         int rangeFood = maxFood - minFood;
         eat = (int) (Math.random() * rangeFood) + minFood;
     }
-    boolean hasEaten() {
-        if (food > eat){
-            food = food - eat;
-            System.out.println(name + " has eaten " + eat + " units of " + foodType + ", and has " + food + " units of " + foodType + " left");
+    void hasEaten() {
+           if (food > eat) {
+             remainingFood = food - eat;
+            System.out.println(name + " has eaten " + eat + " units of " + foodType + ", and has " + remainingFood + " units of " + foodType + " left");
         }
-        else {
-            System.out.println(name + " is out of " + foodType);
+           if (food < eat) {
+               System.out.println(name + " is out of " + foodType);
             System.out.println("press 1 if you want to fill their bowl. press 2 if you want them to starve");
             Scanner scanner = new Scanner(System.in);
             refillFood = scanner.nextInt();
             if (refillFood == 1) {
                 moreFood();
             }
-            if (refillFood == 2) {
-                return true;
-            }
         }
-        return false;
-
+           food = remainingFood;
     }
     void moreFood() {
         Random rand = new Random();

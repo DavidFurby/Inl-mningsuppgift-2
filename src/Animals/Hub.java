@@ -13,6 +13,9 @@ class Hub {
     private List<Elephant> elephants = new ArrayList<>();
     private List<Parrot> parrots = new ArrayList<>();
     private int years;
+    public int currentDay;
+    public  int currentDogAgeInDays;
+    public  int currentDogAgeInYears;
 
     Hub() {
         System.out.println("Start");
@@ -67,6 +70,7 @@ class Hub {
             System.out.println("Animal type: " + dog.animal);
             System.out.println("Name: " + dog.getName());
             System.out.println("Age:" + dog.getAge());
+            System.out.println("Age in Days: " + dog.getAgeInDays());
             System.out.println("Animal sound " + dog.sound);
             System.out.println("current units of " + dog.getFoodType() + ": " + dog.getFood() + "\n");
         }
@@ -100,7 +104,6 @@ class Hub {
 
     private void someDayInLife(int currentDay) {
         while (true) {
-            int daysInYear = 365;
             System.out.println("Current year: " + years);
             System.out.println("Current day: " + currentDay + "\n");
             printAllAnimals(0);
@@ -110,29 +113,29 @@ class Hub {
                 System.out.println("How many days would you like to advance?");
                 int howManyDays = sc.nextInt();
                 currentDay += howManyDays;
-
                 for (Dog dog : dogs) {
+                    currentDogAgeInDays = dog.getAgeInDays() + currentDay;
+                    currentDogAgeInYears = currentDogAgeInDays / 365;
                     dog.hasEaten();
-                    if (dog.hasDiedOfStarvation()) {
-                        dogs.remove(dog);
+                    if (currentDogAgeInDays % 5 == 0) {
+                        System.out.println(dog.name + " does not have a toy");
+                        dog.brokenChewToy();
                     }
-                    if (currentDay >= daysInYear) {
-                        dog.hasAged();
+                    if (currentDogAgeInDays % 6 == 0){
+                        System.out.println(dog.name +  " was given a new toy");
+                        dog.newChewToy();
                     }
                     if (dog.hasDiedOfAge()) {
                         dogs.remove(dog);
                     }
+                    if (dog.hasDiedOfStarvation()) {
+                        dogs.remove(dog);
+                    }
                     for (Elephant elephant : elephants) {
-                        if (currentDay >= daysInYear) {
-                            elephant.hasAged();
-                        }
                         if (elephant.hasDiedOfAge()) {
                             elephants.remove(elephant);
                         }
                         for (Parrot parrot : parrots) {
-                            if (currentDay >= daysInYear) {
-                                parrot.hasAged();
-                            }
                             if (parrot.hasDiedOfAge()) {
                                 parrots.remove(parrot);
                             }
