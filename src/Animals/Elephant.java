@@ -9,7 +9,7 @@ class Elephant extends Animal {
         getSound("PFFFPPFFF!");
         giveName();
         randomAge(70);
-        setFood(100);
+        food = 100;
         randomFoodConsumption(70, 1);
         setFoodType("Bananas");
         randomHeight(4, 2);
