@@ -77,7 +77,7 @@ abstract class Animal {
     }
     void hasAged() {
         age++;
-        System.out.println(name + " Has turned " + age + " years old");
+        System.out.println(name + " has turned " + age + " years old");
     }
     boolean hasDiedOfAge() {
         if (age == maxAge) {
@@ -89,7 +89,7 @@ abstract class Animal {
 
     boolean hasDiedOfStarvation() {
         if (hasEaten()) {
-            System.out.println(name +  "has died from starvation");
+            System.out.println(name +  " has died from starvation");
             return true;
         }
         return false;
