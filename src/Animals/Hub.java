@@ -105,7 +105,7 @@ class Hub {
     private void someDayInLife() {
         while (true) {
             printAllAnimals(0);
-            System.out.println("would you like to continue? Type 1 if yes. 2 if no");
+            System.out.println("Would you like to continue? Type 1 if yes. 2 if no");
             int toContinue = sc.nextInt();
             if (toContinue == 1) {
                 System.out.println("How many days would you like to advance?");
@@ -149,7 +149,7 @@ class Hub {
     private void aDogsLife() {
         System.out.println("What name do you want to give the dog");
         Dog myDog = new Dog();
-        System.out.println("Your " + myDog.animal + "s name is: " + myDog.name);
+        System.out.println("Your " + myDog.animal + "'s name is: " + myDog.name);
         System.out.println(myDog.AnimalVariables);
         addAnimals(myDog);
         menu();
@@ -157,7 +157,7 @@ class Hub {
     private void aParrotsLife() {
         System.out.println("What name do you want to give to the parrot?");
         Parrot myParrot = new Parrot();
-        System.out.println("Your " + myParrot.animal + "s name is: " + myParrot.name);
+        System.out.println("Your " + myParrot.animal + "'s name is: " + myParrot.name);
         System.out.println(myParrot.AnimalVariables);
         addAnimals(myParrot);
         menu();
@@ -167,7 +167,7 @@ class Hub {
     private void anElephantsLife() {
         System.out.println("What name do you want to give to the elephant?");
         Elephant myElephant = new Elephant();
-        System.out.println("Your " + myElephant.animal + "s name is: " + myElephant.name);
+        System.out.println("Your " + myElephant.animal + "'s name is: " + myElephant.name);
         System.out.println(myElephant.AnimalVariables);
         addAnimals(myElephant);
         menu();
@@ -186,5 +186,11 @@ class Hub {
                 parrots.add((Parrot) animal);
                 break;
         }
+    }
+
+    private void comparison() {
+        //biggest: height
+        //best: age
+        //most beautiful: weight
     }
 }

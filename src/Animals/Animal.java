@@ -79,17 +79,10 @@ abstract class Animal {
         age = (int) (Math.random() * rangeAge) + 1;
         ageInDays = age * 365;
     }
-    void newDay() {
         Scanner scanner = new Scanner(System.in);
         int howManyDays = scanner.nextInt();
             ageInDays += howManyDays;
     }
-    boolean hasDiedOfAge() {
-        if (age == maxAge) {
-            System.out.println(name + " has died from natural causes ");
-            return true;
-        }
-        return false;
     }
 
     void randomFoodConsumption(int maxFood, int minFood) {
