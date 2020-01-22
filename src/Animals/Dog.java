@@ -4,7 +4,7 @@ import java.util.Random;
 
 //Dog class that will inherit from Animal
 class Dog extends Animal {
-    private boolean chewToy;
+    public boolean chewToy;
 
     Dog() {
         getAnimalName("Dog");
@@ -19,12 +19,14 @@ class Dog extends Animal {
         randomWeight(35, 1);
         moreDogFood();
         printValue();
+        brokenChewToy();
+        newChewToy();
     }
-
+    void brokenChewToy() {
+        chewToy = false;
+    }
     void newChewToy() {
-        if (chewToy = false) {
-            chewToy = true;
-        }
+      chewToy = true;
     }
     private void moreDogFood(){
     moreFood();
