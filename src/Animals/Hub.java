@@ -67,7 +67,8 @@ class Hub {
             System.out.println("Animal type: " + dog.animal);
             System.out.println("Name: " + dog.getName());
             System.out.println("Age:" + dog.getAge());
-            System.out.println("Animal sound " + dog.sound + "\n");
+            System.out.println("Animal sound " + dog.sound);
+            System.out.println("current units of " + dog.getFoodType() + ": " + dog.getFood() + "\n");
         }
 
         for (Elephant elephant : elephants) {
@@ -100,9 +101,6 @@ class Hub {
     private void someDayInLife(int currentDay) {
         while (true) {
             int daysInYear = 365;
-            if (currentDay <= daysInYear) {
-                years++;
-            }
             System.out.println("Current year: " + years);
             System.out.println("Current day: " + currentDay + "\n");
             printAllAnimals(0);
@@ -115,24 +113,27 @@ class Hub {
 
                 for (Dog dog : dogs) {
                     dog.hasEaten();
+                    if (dog.hasDiedOfStarvation()) {
+                        dogs.remove(dog);
+                    }
                     if (currentDay >= daysInYear) {
                         dog.hasAged();
                     }
-                    if (dog.hasDied()) {
+                    if (dog.hasDiedOfAge()) {
                         dogs.remove(dog);
                     }
                     for (Elephant elephant : elephants) {
                         if (currentDay >= daysInYear) {
                             elephant.hasAged();
                         }
-                        if (elephant.hasDied()) {
+                        if (elephant.hasDiedOfAge()) {
                             elephants.remove(elephant);
                         }
                         for (Parrot parrot : parrots) {
                             if (currentDay >= daysInYear) {
                                 parrot.hasAged();
                             }
-                            if (parrot.hasDied()) {
+                            if (parrot.hasDiedOfAge()) {
                                 parrots.remove(parrot);
                             }
                         }

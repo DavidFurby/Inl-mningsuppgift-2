@@ -9,10 +9,9 @@ class Parrot extends Animal {
         getSound("SQWACK!");
         giveName();
         randomAge(95);
-        getFood(20);
-        doesHasFood();
+        setFood(20);
         randomFoodConsumption(12, 7);
-        getFoodType("seeds");
+        setFoodType("seeds");
         randomHeight(2, 0.5);
         randomWeight(4, 0.5);
         printValue();

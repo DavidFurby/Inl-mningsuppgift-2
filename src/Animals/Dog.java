@@ -12,10 +12,9 @@ class Dog extends Animal {
         chewToy = true;
         giveName();
         randomAge(15);
-        getFood(50);
-        doesHasFood();
+        setFood(50);
         randomFoodConsumption(42, 23);
-        getFoodType("DogFood");
+        setFoodType("Dog Food");
         randomHeight(1, 0.3);
         randomWeight(35, 1);
         moreDogFood();
@@ -28,8 +27,6 @@ class Dog extends Animal {
         }
     }
     private void moreDogFood(){
-        Random rand = new Random();
-        int food = rand.nextInt(50);
-        food += 1;
+    moreFood();
     }
 }
