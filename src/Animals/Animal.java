@@ -10,8 +10,8 @@ abstract class Animal {
     String animal;
     String sound;
     String name;
-    private double weight;
-    private double height;
+    private int weight;
+    private int height;
     private int eat;
     private int age;
     private int ageInDays;
@@ -61,6 +61,14 @@ abstract class Animal {
     }
     int getAgeInDays() {
         return ageInDays;
+    }
+
+    int getHeight() {
+        return height;
+    }
+
+    int getWeight() {
+        return weight;
     }
 
     void setFoodType(String foodType) {
