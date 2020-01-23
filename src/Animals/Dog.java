@@ -8,8 +8,6 @@ class Dog extends Animal {
     Dog() {
         getAnimalName("Dog");
         getSound("BARK!");
-        chewToy = true;
-        giveName();
         food = 50;
         randomAge(15);
         randomFoodConsumption(42, 23);
@@ -18,26 +16,29 @@ class Dog extends Animal {
         randomWeight(35, 1);
         printValue();
     }
-    void brokenChewToy() {
+    void chewToy() {
         for (int i = 1; i <= howManyDays; i++) {
+            currentDay++;
+            brokenChewToy();
+            newChewToy();
+        }
+    }
+    private void brokenChewToy() {
             if (chewToy) {
-                if (getAgeInDays() % 5 == 0) {
+                if (currentDay % 5 == 0) {
                     System.out.println(name + " chew-toy broke");
                     chewToy = false;
                 }
             }
         }
-    }
-    void newChewToy() {
-        for (int i = 1; i <= howManyDays; i++) {
+    private void newChewToy() {
             if (!chewToy) {
-                if (getAgeInDays() % 5 != 0) {
+                if (currentDay % 5 != 0) {
                     System.out.println(name + " got a new chew-toy");
                     chewToy = true;
                 }
             }
         }
-    }
 
     void moreDogFood() {
             Random rand = new Random();
@@ -46,8 +47,13 @@ class Dog extends Animal {
                 moreDogFood();
             }
             if (eat <= food) {
-                System.out.println("Filling up " + name + " bowl with " + food + " units of " + getFoodType());
+                System.out.println("Filling up " + name + "'s bowl with " + food + " units of " + getFoodType());
                 hasEaten();
+                if (refillFood == 1) {
+                    return;
+                }
+                if (refillFood == 0) {
+                }
             }
-        }
+    }
     }

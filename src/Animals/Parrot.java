@@ -8,7 +8,6 @@ class Parrot extends Animal {
     Parrot() {
         getAnimalName("Parrot");
         getSound("SQWACK!");
-        giveName();
         randomAge(95);
         flying = false;
         food = 20;
@@ -17,9 +16,14 @@ class Parrot extends Animal {
         randomHeight(2, 0.5);
         randomWeight(4, 0.5);
         printValue();
-        moreSeeds();
     }
-
+    void toFly(){
+        for (int i = 1; i <= howManyDays; i++) {
+            currentDay++;
+            fly();
+            land();
+        }
+    }
     void fly() {
         for (int i = 1; i <= howManyDays; i++) {
             if (!flying) {

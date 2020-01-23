@@ -11,16 +11,16 @@ abstract class Animal {
     String name;
     private int weight;
     private int height;
-    private int eat;
+    int eat;
     private int age;
     private int ageInDays;
     private String foodType;
     private int maxAge;
     int food;
     int needRefill;
-    int remainingFood;
     int howManyDays;
     int currentDay;
+    int refillFood;
     private DecimalFormat df = new DecimalFormat("0.00");
 
 
@@ -92,12 +92,16 @@ abstract class Animal {
         howManyDays = scanner.nextInt();
         System.out.println("advancing by " + howManyDays + " day(s) for " + name);
         ageInDays += howManyDays;
+        setCurrentDay();
     }
 
     boolean hasDiedOfAge() {
-        if (ageInDays >= maxAge * 356) {
-            System.out.println(name + " has died due to age\n");
-            return true;
+        for (int i = 1; i <= howManyDays; i++) {
+            currentDay++;
+            if (ageInDays >= maxAge * 365) {
+                System.out.println(name + " has died due to age\n");
+                return true;
+            }
         }
         return false;
     }
@@ -107,39 +111,54 @@ abstract class Animal {
         eat = (int) (Math.random() * rangeFood) + minFood;
     }
 
-    void loopDays() {
-         currentDay = ageInDays - howManyDays;
-        for (int i = 1; i <= howManyDays; i++) {
-            currentDay++;
-            System.out.println("Day :" + currentDay);
-            hasEaten();
-            hasDiedOfAge();
-        }
+    private void setCurrentDay() {
+        currentDay = ageInDays - howManyDays;
     }
-            void hasEaten() {
+
+         boolean loopDays() {
+            for (int i = 1; i <= howManyDays; i++) {
+                currentDay++;
+                System.out.println("Day : " + currentDay);
+                hasEaten();
+                if (refillFood == 1) {
+                    return true;
+                }
+            }
+             return false;
+         }
+            int hasEaten() {
             if (food < eat) {
                 System.out.println(name + " needs to eat " + eat + " units of " + foodType + " but only has " + food + " units of " + foodType + " left");
                 System.out.println("press 1 if you want to fill their bowl.");
                 Scanner scanner = new Scanner(System.in);
-                int refillFood = scanner.nextInt();
-                if (refillFood == 1) {
-                    needRefill = 1;
-                    return;
-                }
+                 refillFood = scanner.nextInt();
+                 if (refillFood == 1) {
+                     return refillFood;
+                 }
             }
             if (food >= eat) {
-                remainingFood = food - eat;
+                int remainingFood = food - eat;
                 System.out.println(name + " has eaten " + eat + " units of " + foodType + ", and has " + remainingFood + " units of " + foodType + " left");
                 food = remainingFood;
             }
-                needRefill = 0;
+                if (currentDay < ageInDays) {
+                    loopDays();
+                    if (refillFood == 1) {
+                        return refillFood;
+                    }
+                }
+                if (currentDay >= ageInDays){
+                    return refillFood = 0;
+                }
+                return refillFood = 0;
             }
+
     void randomHeight(double maxHeight, double minHeight) {
         double rangeHeight = (maxHeight - minHeight + 1);
-        height = ((Math.random() * rangeHeight) + minHeight);
+        height = (int) ((Math.random() * rangeHeight) + minHeight);
     }
     void randomWeight(double maxWeight, double minWeight) {
         double rangeWeight = maxWeight - minWeight + 1;
-        weight = ((Math.random() * rangeWeight) + minWeight);
+        weight = (int) ((Math.random() * rangeWeight) + minWeight);
     }
 }

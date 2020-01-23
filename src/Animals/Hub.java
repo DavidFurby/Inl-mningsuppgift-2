@@ -21,7 +21,7 @@ class Hub {
     private void menu() {
         Scanner sc = new Scanner(System.in);
         String menu;
-        System.out.println("For new animal, press: 1. \nTo start first day, press: 2. \nTo show all animals, press 3. \nTo exit, press: 4.");
+        System.out.println("For new animal, press: 1. \nTo start first day, press: 2. \nTo show all animals, press 3. \nTo compare animals, press: 4. \nTo exit, press 5.");
         while (true) {
             menu = sc.next();
             switch (menu) {
@@ -35,7 +35,11 @@ class Hub {
                     printAllAnimals(1);
                     break;
                 case "4":
+                    comparison();
+                    break;
+                case "5":
                     exit();
+                    break;
             }
         }
     }
@@ -110,26 +114,29 @@ class Hub {
             for (Dog dog : dogs) {
                 dog.newDay();
                 dog.loopDays();
-                if (dog.needRefill == 1) {
+                while (dog.refillFood == 1) {
                     dog.moreDogFood();
                 }
-                dog.brokenChewToy();
-                dog.newChewToy();
-                if (dog.hasDiedOfAge()) {
-                    dogs.remove(dog);
-                    break;
+                if (dog.refillFood == 0) {
+                    dog.chewToy();
+                    if (dog.hasDiedOfAge()) {
+                        dogs.remove(dog);
+                        break;
+                    }
                 }
             }
             for (Elephant elephant : elephants) {
                 elephant.newDay();
                 elephant.loopDays();
-                if (elephant.needRefill == 1) {
+                while (elephant.needRefill == 1) {
                     elephant.moreBananas();
                 }
-                elephant.bath();
-                if (elephant.hasDiedOfAge()) {
-                    elephants.remove(elephant);
-                    break;
+                if (elephant.refillFood == 0) {
+                    elephant.bath();
+                    if (elephant.hasDiedOfAge()) {
+                        elephants.remove(elephant);
+                        break;
+                    }
                 }
             }
             for (Parrot parrot : parrots) {
@@ -138,11 +145,12 @@ class Hub {
                 if (parrot.needRefill == 1) {
                     parrot.moreSeeds();
                 }
-                parrot.land();
-                parrot.fly();
-                if (parrot.hasDiedOfAge()) {
-                    parrots.remove(parrot);
-                    break;
+                if (parrot.needRefill == 0) {
+                    parrot.toFly();
+                    if (parrot.hasDiedOfAge()) {
+                        parrots.remove(parrot);
+                        break;
+                    }
                 }
             }
         }
@@ -155,6 +163,7 @@ class Hub {
     private void aDogsLife() {
         System.out.println("What name do you want to give the dog");
         Dog myDog = new Dog();
+        myDog.giveName();
         System.out.println("Your " + myDog.animal + "'s name is: " + myDog.name);
         System.out.println(myDog.AnimalVariables);
         addAnimals(myDog);
@@ -164,6 +173,7 @@ class Hub {
     private void aParrotsLife() {
         System.out.println("What name do you want to give to the parrot?");
         Parrot myParrot = new Parrot();
+        myParrot.giveName();
         System.out.println("Your " + myParrot.animal + "'s name is: " + myParrot.name);
         System.out.println(myParrot.AnimalVariables);
         addAnimals(myParrot);
@@ -174,6 +184,7 @@ class Hub {
     private void anElephantsLife() {
         System.out.println("What name do you want to give to the elephant?");
         Elephant myElephant = new Elephant();
+        myElephant.giveName();
         System.out.println("Your " + myElephant.animal + "'s name is: " + myElephant.name);
         System.out.println(myElephant.AnimalVariables);
         addAnimals(myElephant);
@@ -196,14 +207,6 @@ class Hub {
     }
 
     private void comparison() {
-        //biggest: height
-        //best: age
-        //most beautiful: weight
-
-        //Dog bestDog for(dog)
-        //if(i==0) {bestDog = dog.get(i); }
-        //if bestDog.age < dog.get(i).age { bestDog = dog.get(i); }
-
         Dog bestDog = new Dog();
         for (int i = 0; i < dogs.size(); i++) {
             if (i == 0) {
@@ -213,7 +216,7 @@ class Hub {
                 bestDog = dogs.get(i);
             }
         }
-        System.out.println("The best dog is: " + bestDog);
+        System.out.println("The best dog is: " + bestDog.name);
 
         Dog biggestDog = new Dog();
         for (int j = 0; j < dogs.size(); j++) {
@@ -224,7 +227,7 @@ class Hub {
                 biggestDog = dogs.get(j);
             }
         }
-        System.out.println("The biggest dog is: " + biggestDog);
+        System.out.println("The biggest dog is: " + biggestDog.name);
 
         Dog mostBeautifulDog = new Dog();
         for (int o = 0; o < dogs.size(); o++) {
@@ -235,7 +238,7 @@ class Hub {
                 mostBeautifulDog = dogs.get(o);
             }
         }
-        System.out.println("The most beautiful dog is: " + mostBeautifulDog);
+        System.out.println("The most beautiful dog is: " + mostBeautifulDog.name);
 
         Elephant bestElephant = new Elephant();
         for (int e = 0; e < elephants.size(); e++) {
@@ -246,7 +249,7 @@ class Hub {
                 bestElephant = elephants.get(e);
             }
         }
-        System.out.println("The best elephant is: " + bestElephant);
+        System.out.println("The best elephant is: " + bestElephant.name);
 
         Elephant biggestElephant = new Elephant();
         for (int w = 0; w < elephants.size(); w++) {
@@ -257,7 +260,7 @@ class Hub {
                 biggestElephant = elephants.get(w);
             }
         }
-        System.out.println("The biggest elephant is: " + biggestElephant);
+        System.out.println("The biggest elephant is: " + biggestElephant.name);
 
         Elephant mostBeautifulElephant = new Elephant();
         for (int q = 0; q < elephants.size(); q++) {
@@ -268,10 +271,11 @@ class Hub {
                 mostBeautifulElephant = elephants.get(q);
             }
         }
-        System.out.println("The most beautiful elephant is: " + mostBeautifulElephant);
+        System.out.println("The most beautiful elephant is: " + mostBeautifulElephant.name);
 
 
         Parrot bestParrot = new Parrot();
+
         for (int a = 0; a < parrots.size(); a++) {
             if (a == 0) {
                 bestParrot = parrots.get(a);
@@ -280,7 +284,7 @@ class Hub {
                 bestParrot = parrots.get(a);
             }
         }
-        System.out.println("The best parrot is: " + bestParrot);
+        System.out.println("The best parrot is: " + bestParrot.name);
 
         Parrot biggestParrot = new Parrot();
         for (int z = 0; z < parrots.size(); z++) {
@@ -291,7 +295,7 @@ class Hub {
                 biggestParrot = parrots.get(z);
             }
         }
-        System.out.println("The biggest parrot is: " + biggestParrot);
+        System.out.println("The biggest parrot is: " + biggestParrot.name);
 
         Parrot mostBeautifulParrot = new Parrot();
         for (int s = 0; s < parrots.size(); s++) {
@@ -302,6 +306,8 @@ class Hub {
                 mostBeautifulParrot = parrots.get(s);
             }
         }
-        System.out.println("The most beautiful parrot is: " + mostBeautifulParrot);
+        System.out.println("The most beautiful parrot is: " + mostBeautifulParrot.name);
+        System.out.println("\n");
+        menu();
     }
 }
