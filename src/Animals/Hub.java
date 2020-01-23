@@ -33,7 +33,7 @@ class Hub {
                     selectAnimal();
                     break;
                 case "2":
-                    someDayInLife(1);
+                    someDayInLife();
                     break;
                 case "3":
                     printAllAnimals(1);
@@ -72,7 +72,7 @@ class Hub {
             System.out.println("Age:" + dog.getAge());
             System.out.println("Age in Days: " + dog.getAgeInDays());
             System.out.println("Animal sound " + dog.sound);
-            System.out.println("current units of " + dog.getFoodType() + ": " + dog.getFood() + "\n");
+            System.out.println("current units of " + dog.getFoodType() + ": " + dog.food + "\n");
         }
 
         for (Elephant elephant : elephants) {
@@ -102,27 +102,26 @@ class Hub {
 /*tried to get the day-system to work, but we don´t know how to specify specific days during the arrays loop where the
 * functions will activate on repeat*/
 
-    private void someDayInLife(int currentDay) {
+    private void someDayInLife() {
         while (true) {
-            System.out.println("Current year: " + years);
-            System.out.println("Current day: " + currentDay + "\n");
             printAllAnimals(0);
             System.out.println("Would you like to continue? Type 1 if yes. 2 if no");
             int toContinue = sc.nextInt();
             if (toContinue == 1) {
                 System.out.println("How many days would you like to advance?");
-                int howManyDays = sc.nextInt();
-                currentDay += howManyDays;
                 for (Dog dog : dogs) {
-                    currentDogAgeInDays = dog.getAgeInDays() + currentDay;
-                    currentDogAgeInYears = currentDogAgeInDays / 365;
+                    dog.newDay();
                     dog.hasEaten();
-                    if (currentDogAgeInDays % 5 == 0) {
-                        System.out.println(dog.name + " does not have a toy");
-                        dog.brokenChewToy();
+                    if (dog.needRefill == 1) {
+                        dog.moreDogFood();
                     }
-                    if (currentDogAgeInDays % 6 == 0){
-                        System.out.println(dog.name +  " was given a new toy");
+                    if (dog.getAgeInDays() % 5 == 0) {
+                        dog.brokenChewToy();
+                        System.out.println(dog.name + " chew-toy broke");
+
+                    }
+                    if (dog.getAgeInDays() % 6 == 0){
+                        System.out.println(dog.name +  " was given a new chew-toy");
                         dog.newChewToy();
                     }
                     if (dog.hasDiedOfAge()) {
@@ -138,7 +137,7 @@ class Hub {
                             }
                         }
                     }
-                    someDayInLife(currentDay);
+                    someDayInLife();
                 }
             }
             if (toContinue == 2) {
