@@ -11,7 +11,7 @@ class Elephant extends Animal {
         getSound("PFFFPPFFF!");
         randomAge(70);
         food = 100;
-        randomFoodConsumption(70, 1);
+        randomFoodConsumption(50, 30);
         setFoodType("Bananas");
         randomHeight(4, 2);
         randomWeight(7000, 3000);
@@ -35,13 +35,18 @@ class Elephant extends Animal {
          }
     void moreBananas(){
         Random rand = new Random();
-        food += rand.nextInt(50);
+        food += rand.nextInt(100);
         if (eat > food) {
             moreBananas();
         }
         if (eat <= food) {
-            System.out.println("Filling up " + name + " bowl with " + food + " units of " + getFoodType());
+            System.out.println("Filling up " + name + "'s bowl with " + food + " units of " + getFoodType());
             hasEaten();
+            if (refillFood == 1) {
+                return;
+            }
+            if (refillFood == 0) {
+            }
         }
     }
 }

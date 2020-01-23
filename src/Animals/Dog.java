@@ -5,6 +5,7 @@ import java.util.Random;
 //Dog class that will inherit from Animal
 class Dog extends Animal {
     private boolean chewToy;
+
     Dog() {
         getAnimalName("Dog");
         getSound("BARK!");

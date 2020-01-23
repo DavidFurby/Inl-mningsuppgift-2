@@ -1,24 +1,30 @@
 package Animals;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 class Hub {
-
-    private Scanner sc = new Scanner(System.in);
-
-    //Created three ArrayList to hold an unlimited amount of different animals
+    /**
+     *  Created three ArrayList to hold an unlimited amount of different animals
+     */
     private List<Dog> dogs = new ArrayList<>();
     private List<Elephant> elephants = new ArrayList<>();
     private List<Parrot> parrots = new ArrayList<>();
 
+    /***
+     * The hubClass that the main-class will lead into
+     */
     Hub() {
         System.out.println("Start");
         menu();
     }
 
-    private void menu() {
+    /**
+     * A menu which is used to give the alternatives for the user
+     */
+     void menu() {
         Scanner sc = new Scanner(System.in);
         String menu;
         System.out.println("For new animal, press: 1. \nTo start first day, press: 2. \nTo show all animals, press 3. \nTo compare animals, press: 4. \nTo exit, press 5.");
@@ -44,6 +50,9 @@ class Hub {
         }
     }
 
+    /**
+     * method to let the user select an animal
+     */
     private void selectAnimal() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Choose your Animal. \nFor Dog, press: 1. For Parrot, press: 2. For Elephant, press: 3");
@@ -64,7 +73,11 @@ class Hub {
         }
     }
 
-    //print out all the animals in the animal arrays on command
+
+    /**
+     *  print out the values for all the animals
+     * @param returnToMenu when this method is called assign 1 within the parameters to return to menu after its done
+     */
     private void printAllAnimals(int returnToMenu) {
         for (Dog dog : dogs) {
             System.out.println("\nAnimal type: " + dog.animal);
@@ -86,7 +99,7 @@ class Hub {
         for (Parrot parrot : parrots) {
             System.out.println("\nAnimal type: " + parrot.animal);
             System.out.println("Name: " + parrot.getName());
-            System.out.println("Age: " + parrot.getAgeInDays());
+            System.out.println("Age in days: " + parrot.getAgeInDays());
             System.out.println("current units of " + parrot.getFoodType() + ": " + parrot.food + "\n");
         }
         if (returnToMenu == 1) {
@@ -94,14 +107,17 @@ class Hub {
         }
     }
 
+    /**
+     * method to exit system
+     */
     private void exit() {
         System.out.println("Okay. Bye then");
         System.exit(0);
     }
 
-    /*tried to get the day-system to work, but we don´t know how to specify specific days during the arrays loop where the
-     * functions will activate on repeat*/
-
+    /**
+     * the core-program. Sets the system in a loop until all animals are dead or if user exits the class
+     */
     private void someDayInLife() {
         printAllAnimals(0);
         if (dogs.isEmpty() && elephants.isEmpty() && parrots.isEmpty()) {
@@ -109,6 +125,7 @@ class Hub {
             menu();
         }
         System.out.println("Would you like to continue? Type 1 if yes. 2 if no");
+        Scanner sc = new Scanner(System.in);
         int toContinue = sc.nextInt();
         if (toContinue == 1) {
             for (Dog dog : dogs) {
@@ -160,6 +177,9 @@ class Hub {
         }
     }
 
+    /**
+     * List of methods to create animals
+     */
     private void aDogsLife() {
         System.out.println("What name do you want to give the dog");
         Dog myDog = new Dog();
@@ -179,8 +199,6 @@ class Hub {
         addAnimals(myParrot);
         menu();
     }
-
-    //Create the animal-object and insert it into the specified ArrayList
     private void anElephantsLife() {
         System.out.println("What name do you want to give to the elephant?");
         Elephant myElephant = new Elephant();
@@ -308,6 +326,6 @@ class Hub {
         }
         System.out.println("The most beautiful parrot is: " + mostBeautifulParrot.name);
         System.out.println("\n");
-        menu();
+
     }
 }

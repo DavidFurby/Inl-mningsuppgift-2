@@ -9,8 +9,8 @@ abstract class Animal {
     String animal;
     String sound;
     String name;
-    private int weight;
-    private int height;
+    double weight;
+    public double height;
     int eat;
     private int age;
     private int ageInDays;
@@ -56,11 +56,11 @@ abstract class Animal {
         return ageInDays;
     }
 
-    int getHeight() {
+    double getHeight() {
         return height;
     }
 
-    int getWeight() {
+    double getWeight() {
         return weight;
     }
 
@@ -155,10 +155,10 @@ abstract class Animal {
 
     void randomHeight(double maxHeight, double minHeight) {
         double rangeHeight = (maxHeight - minHeight + 1);
-        height = (int) ((Math.random() * rangeHeight) + minHeight);
+        height = ((Math.random() * rangeHeight) + minHeight);
     }
     void randomWeight(double maxWeight, double minWeight) {
         double rangeWeight = maxWeight - minWeight + 1;
-        weight = (int) ((Math.random() * rangeWeight) + minWeight);
+        weight = ((Math.random() * rangeWeight) + minWeight);
     }
 }

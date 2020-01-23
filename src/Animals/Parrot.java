@@ -47,13 +47,18 @@ class Parrot extends Animal {
     }
     void moreSeeds(){
         Random rand = new Random();
-        food += rand.nextInt(50);
+        food += rand.nextInt(30);
         if (eat > food) {
             moreSeeds();
         }
         if (eat <= food) {
-            System.out.println("Filling up " + name + " bowl with " + food + " units of " + getFoodType());
+            System.out.println("Filling up " + name + "'s bowl with " + food + " units of " + getFoodType());
             hasEaten();
+            if (refillFood == 1) {
+                return;
+            }
+            if (refillFood == 0) {
+            }
         }
     }
 }

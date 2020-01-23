@@ -148,11 +148,6 @@
           </properties>
           <option name="timeStamp" value="125" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Animals/Hub.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="128" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
