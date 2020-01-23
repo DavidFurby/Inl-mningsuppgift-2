@@ -12,10 +12,6 @@ class Hub {
     private List<Dog> dogs = new ArrayList<>();
     private List<Elephant> elephants = new ArrayList<>();
     private List<Parrot> parrots = new ArrayList<>();
-    private int years;
-    public int currentDay;
-    public  int currentDogAgeInDays;
-    public  int currentDogAgeInYears;
 
     Hub() {
         System.out.println("Start");
@@ -67,29 +63,29 @@ class Hub {
     //print out all the animals in the animal arrays on command
     private void printAllAnimals(int returnToMenu) {
         for (Dog dog : dogs) {
-            System.out.println("Animal type: " + dog.animal);
+            System.out.println("\nAnimal type: " + dog.animal);
             System.out.println("Name: " + dog.getName());
-            System.out.println("Age:" + dog.getAge());
             System.out.println("Age in Days: " + dog.getAgeInDays());
             System.out.println("Animal sound " + dog.sound);
             System.out.println("current units of " + dog.getFoodType() + ": " + dog.food + "\n");
         }
 
         for (Elephant elephant : elephants) {
-            System.out.println("Animal type: " + elephant.animal);
+            System.out.println("\nAnimal type: " + elephant.animal);
             System.out.println("Name: " + elephant.getName());
-            System.out.println("Age: " + elephant.getAge());
+            System.out.println("Age in Days: " + elephant.getAgeInDays());
             System.out.println("Animal sound " + elephant.sound + "\n");
+            System.out.println("current units of " + elephant.getFoodType() + ": " + elephant.food + "\n");
+
         }
 
         for (Parrot parrot : parrots) {
-            System.out.println("Animal type: " + parrot.animal);
+            System.out.println("\nAnimal type: " + parrot.animal);
             System.out.println("Name: " + parrot.getName());
-            System.out.println("Age: " + parrot.getAge());
-            System.out.println("Animal sound: " + parrot.sound + "\n");
+            System.out.println("Age: " + parrot.getAgeInDays());
+            System.out.println("current units of " + parrot.getFoodType() + ": " + parrot.food + "\n");
         }
-        if (returnToMenu == 1)
-        {
+        if (returnToMenu == 1) {
             menu();
         }
     }
@@ -99,53 +95,63 @@ class Hub {
         System.exit(0);
     }
 
-/*tried to get the day-system to work, but we don´t know how to specify specific days during the arrays loop where the
-* functions will activate on repeat*/
+    /*tried to get the day-system to work, but we don´t know how to specify specific days during the arrays loop where the
+     * functions will activate on repeat*/
 
     private void someDayInLife() {
-        while (true) {
-            printAllAnimals(0);
-            System.out.println("Would you like to continue? Type 1 if yes. 2 if no");
-            int toContinue = sc.nextInt();
-            if (toContinue == 1) {
-                System.out.println("How many days would you like to advance?");
-                for (Dog dog : dogs) {
-                    dog.newDay();
-                    dog.hasEaten();
-                    if (dog.needRefill == 1) {
-                        dog.moreDogFood();
-                    }
-                    if (dog.getAgeInDays() % 5 == 0) {
-                        dog.brokenChewToy();
-                        System.out.println(dog.name + " chew-toy broke");
-
-                    }
-                    if (dog.getAgeInDays() % 6 == 0){
-                        System.out.println(dog.name +  " was given a new chew-toy");
-                        dog.newChewToy();
-                    }
-                    if (dog.hasDiedOfAge()) {
-                        dogs.remove(dog);
-                    }
-                    for (Elephant elephant : elephants) {
-                        if (elephant.hasDiedOfAge()) {
-                            elephants.remove(elephant);
-                        }
-                        for (Parrot parrot : parrots) {
-                            if (parrot.hasDiedOfAge()) {
-                                parrots.remove(parrot);
-                            }
-                        }
-                    }
-                    someDayInLife();
+        printAllAnimals(0);
+        if (dogs.isEmpty() && elephants.isEmpty() && parrots.isEmpty()) {
+            System.out.println("\nAll animals have died. Returning to menu");
+            menu();
+        }
+        System.out.println("Would you like to continue? Type 1 if yes. 2 if no");
+        int toContinue = sc.nextInt();
+        if (toContinue == 1) {
+            for (Dog dog : dogs) {
+                dog.newDay();
+                dog.loopDays();
+                if (dog.needRefill == 1) {
+                    dog.moreDogFood();
+                }
+                dog.brokenChewToy();
+                dog.newChewToy();
+                if (dog.hasDiedOfAge()) {
+                    dogs.remove(dog);
+                    break;
                 }
             }
-            if (toContinue == 2) {
-                menu();
-                break;
+            for (Elephant elephant : elephants) {
+                elephant.newDay();
+                elephant.loopDays();
+                if (elephant.needRefill == 1) {
+                    elephant.moreBananas();
+                }
+                elephant.bath();
+                if (elephant.hasDiedOfAge()) {
+                    elephants.remove(elephant);
+                    break;
+                }
+            }
+            for (Parrot parrot : parrots) {
+                parrot.newDay();
+                parrot.loopDays();
+                if (parrot.needRefill == 1) {
+                    parrot.moreSeeds();
+                }
+                parrot.land();
+                parrot.fly();
+                if (parrot.hasDiedOfAge()) {
+                    parrots.remove(parrot);
+                    break;
+                }
             }
         }
+        someDayInLife();
+        if (toContinue == 2) {
+            menu();
+        }
     }
+
     private void aDogsLife() {
         System.out.println("What name do you want to give the dog");
         Dog myDog = new Dog();
@@ -154,6 +160,7 @@ class Hub {
         addAnimals(myDog);
         menu();
     }
+
     private void aParrotsLife() {
         System.out.println("What name do you want to give to the parrot?");
         Parrot myParrot = new Parrot();
@@ -188,9 +195,4 @@ class Hub {
         }
     }
 
-    private void comparison() {
-        //biggest: height
-        //best: age
-        //most beautiful: weight
-    }
 }
