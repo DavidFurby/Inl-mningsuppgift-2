@@ -130,4 +130,18 @@
       <path value="$PROJECT_DIR$/Animal-Farm" />
     </ignored-roots>
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Animals/Animal.java</url>
+          <line>97</line>
+          <properties class="Animals.Animal" method="hasDiedOfAge">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="125" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
 </project>
