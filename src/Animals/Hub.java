@@ -145,7 +145,7 @@ class Hub {
             for (Elephant elephant : elephants) {
                 elephant.newDay();
                 elephant.loopDays();
-                while (elephant.needRefill == 1) {
+                while (elephant.refillFood == 1) {
                     elephant.moreBananas();
                 }
                 if (elephant.refillFood == 0) {
@@ -159,7 +159,7 @@ class Hub {
             for (Parrot parrot : parrots) {
                 parrot.newDay();
                 parrot.loopDays();
-                if (parrot.needRefill == 1) {
+                while (parrot.refillFood == 1) {
                     parrot.moreSeeds();
                 }
                 if (parrot.needRefill == 0) {
@@ -178,7 +178,7 @@ class Hub {
     }
 
     /**
-     * List of methods to create animals
+     * List of methods to create animal-objects
      */
     private void aDogsLife() {
         System.out.println("What name do you want to give the dog");
@@ -209,8 +209,11 @@ class Hub {
         menu();
     }
 
-
-    private void addAnimals(Animal animal) { //expects input in form of an animal
+    /**
+     * Adds the animal-objects to their respective arrayList
+     * @param animal to identify which animal is being added into the method
+     */
+    private void addAnimals(Animal animal) {
         switch (animal.animal) {
             case "Dog":
                 dogs.add((Dog) animal);

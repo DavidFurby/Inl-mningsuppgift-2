@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/src/Animals/Elephant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Animals/Elephant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Animals/Hub.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Animals/Hub.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Animals/Parrot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Animals/Parrot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Animals/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Animals/Start.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -140,13 +141,15 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/Animals/Animal.java</url>
-          <line>97</line>
-          <properties class="Animals.Animal" method="hasDiedOfAge">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="125" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Animals/Hub.java</url>
+          <line>151</line>
+          <option name="timeStamp" value="135" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Animals/Elephant.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="136" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
