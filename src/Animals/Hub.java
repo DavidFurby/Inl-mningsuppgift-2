@@ -1,6 +1,4 @@
 package Animals;
-
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -51,28 +49,22 @@ class Hub {
     }
 
     /**
-     * method to let the user select an animal
+     * method
      */
     private void selectAnimal() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Choose your Animal. \nFor Dog, press: 1. For Parrot, press: 2. For Elephant, press: 3");
-        String animalSelect;
-        while (true) {
-            animalSelect = sc.next();
-            switch (animalSelect) {
-                case "1":
-                    aDogsLife();
-                    break;
-                case "2":
-                    aParrotsLife();
-                    break;
-                case "3":
-                    anElephantsLife();
-                    break;
+        int animalSelect;
+            animalSelect = (int) (Math.random() * 3) + 1;
+        System.out.println(animalSelect);
+            if (animalSelect == 1) {
+                aDogsLife();
+            }
+            if (animalSelect == 2) {
+                aParrotsLife();
+            }
+            if (animalSelect == 3) {
+                anElephantsLife();
             }
         }
-
-    }
 
 
     /**
@@ -229,7 +221,8 @@ class Hub {
     }
 /**
  * A method that goes through all the animals in the array lists and prints out the best (oldest), biggest,
- * and most beautiful (heaviest) animals from each category.*/
+ * and most beautiful (heaviest) animals from each category.
+ * */
     private void comparison() {
         Dog bestDog = new Dog();
         //loops through the dog array
