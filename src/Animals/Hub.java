@@ -71,6 +71,7 @@ class Hub {
                     break;
             }
         }
+
     }
 
 
@@ -223,13 +224,17 @@ class Hub {
                 break;
         }
     }
-
+/**
+ * A method that goes through all the animals in the array lists and prints out the best (oldest), biggest,
+ * and most beautiful (heaviest) animals from each category.*/
     private void comparison() {
         Dog bestDog = new Dog();
+        //loops through the dog array
         for (int i = 0; i < dogs.size(); i++) {
             if (i == 0) {
                 bestDog = dogs.get(i);
             }
+            //picks out the oldest ("best") dog in the array list
             if (bestDog.getAgeInDays() < dogs.get(i).getAgeInDays()) {
                 bestDog = dogs.get(i);
             }
@@ -327,5 +332,6 @@ class Hub {
         System.out.println("The most beautiful parrot is: " + mostBeautifulParrot.name);
         System.out.println("\n");
 
+        menu();
     }
 }
