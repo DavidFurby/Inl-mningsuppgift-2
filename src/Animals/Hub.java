@@ -227,112 +227,77 @@ class Hub {
                 break;
         }
     }
-/**
- * A method that goes through all the animals in the array lists and prints out the best (oldest), biggest,
- * and most beautiful (heaviest) animals from each category.*/
+    /**
+     * Picks out the "Best" dog in the array list. The method goes through the array list and picks out the oldest animal first.
+     * If more than one dog has the same age, the program compares their weight instead.
+     * If they have the same weight as well, the program compares the heights.
+     * The program then picks out the oldest/biggest/tallest animal and prints it out to the user.*/
     private void comparison() {
         Dog bestDog = new Dog();
-        //loops through the dog array
         for (int i = 0; i < dogs.size(); i++) {
             if (i == 0) {
                 bestDog = dogs.get(i);
             }
-            //picks out the oldest ("best") dog in the array list
             if (bestDog.getAgeInDays() < dogs.get(i).getAgeInDays()) {
                 bestDog = dogs.get(i);
+            } else if (bestDog.getAgeInDays() == dogs.get(i).getAgeInDays()) {
+                if (bestDog.getWeight() < dogs.get(i).getWeight()) {
+                    bestDog = dogs.get(i);
+                } else if (bestDog.getWeight() == dogs.get(i).getWeight()) {
+                    if (bestDog.getHeight() < dogs.get(i).getHeight()) {
+                        bestDog = dogs.get(i);
+                    } else if (bestDog.getHeight() == dogs.get(i).getHeight()) {
+                        bestDog = dogs.get(i);
+                    }
+                }
             }
         }
         System.out.println("The best dog is: " + bestDog.name);
 
-        Dog biggestDog = new Dog();
-        for (int j = 0; j < dogs.size(); j++) {
-            if (j == 0) {
-                biggestDog = dogs.get(j);
-            }
-            if (biggestDog.getHeight() < dogs.get(j).getHeight()) {
-                biggestDog = dogs.get(j);
-            }
-        }
-        System.out.println("The biggest dog is: " + biggestDog.name);
 
-        Dog mostBeautifulDog = new Dog();
-        for (int o = 0; o < dogs.size(); o++) {
-            if (o == 0) {
-                mostBeautifulDog = dogs.get(o);
-            }
-            if (mostBeautifulDog.getWeight() < dogs.get(o).getWeight()) {
-                mostBeautifulDog = dogs.get(o);
-            }
-        }
-        System.out.println("The most beautiful dog is: " + mostBeautifulDog.name);
 
         Elephant bestElephant = new Elephant();
-        for (int e = 0; e < elephants.size(); e++) {
-            if (e == 0) {
-                bestElephant = elephants.get(e);
+        for (int i = 0; i < elephants.size(); i++) {
+            if (i == 0) {
+                bestElephant = elephants.get(i);
             }
-            if (bestElephant.getAgeInDays() < elephants.get(e).getAgeInDays()) {
-                bestElephant = elephants.get(e);
+            if (bestElephant.getAgeInDays() < elephants.get(i).getAgeInDays()) {
+                bestElephant = elephants.get(i);
+            } else if (bestElephant.getAgeInDays() == elephants.get(i).getAgeInDays()) {
+                if (bestElephant.getWeight() < elephants.get(i).getWeight()) {
+                    bestElephant = elephants.get(i);
+                } else if (bestElephant.getWeight() == elephants.get(i).getWeight()) {
+                    if (bestElephant.getHeight() < elephants.get(i).getHeight()) {
+                        bestElephant = elephants.get(i);
+                    } else if (bestElephant.getHeight() == elephants.get(i).getHeight()) {
+                        bestElephant = elephants.get(i);
+                    }
+                }
             }
         }
         System.out.println("The best elephant is: " + bestElephant.name);
 
-        Elephant biggestElephant = new Elephant();
-        for (int w = 0; w < elephants.size(); w++) {
-            if (w == 0) {
-                biggestElephant = elephants.get(w);
-            }
-            if (biggestElephant.getHeight() < elephants.get(w).getHeight()) {
-                biggestElephant = elephants.get(w);
-            }
-        }
-        System.out.println("The biggest elephant is: " + biggestElephant.name);
-
-        Elephant mostBeautifulElephant = new Elephant();
-        for (int q = 0; q < elephants.size(); q++) {
-            if (q == 0) {
-                mostBeautifulElephant = elephants.get(q);
-            }
-            if (mostBeautifulElephant.getWeight() < elephants.get(q).getWeight()) {
-                mostBeautifulElephant = elephants.get(q);
-            }
-        }
-        System.out.println("The most beautiful elephant is: " + mostBeautifulElephant.name);
-
 
         Parrot bestParrot = new Parrot();
-
-        for (int a = 0; a < parrots.size(); a++) {
-            if (a == 0) {
-                bestParrot = parrots.get(a);
+        for (int i = 0; i < parrots.size(); i++) {
+            if (i == 0) {
+                bestParrot = parrots.get(i);
             }
-            if (bestParrot.getAgeInDays() < parrots.get(a).getAgeInDays()) {
-                bestParrot = parrots.get(a);
+            if (bestParrot.getAgeInDays() < parrots.get(i).getAgeInDays()) {
+                bestParrot = parrots.get(i);
+            } else if (bestParrot.getAgeInDays() == parrots.get(i).getAgeInDays()) {
+                if (bestParrot.getWeight() < parrots.get(i).getWeight()) {
+                    bestParrot = parrots.get(i);
+                } else if (bestParrot.getWeight() == parrots.get(i).getWeight()) {
+                    if (bestParrot.getHeight() < parrots.get(i).getHeight()) {
+                        bestParrot = parrots.get(i);
+                    } else if (bestParrot.getHeight() == parrots.get(i).getHeight()) {
+                        bestParrot = parrots.get(i);
+                    }
+                }
             }
         }
         System.out.println("The best parrot is: " + bestParrot.name);
-
-        Parrot biggestParrot = new Parrot();
-        for (int z = 0; z < parrots.size(); z++) {
-            if (z == 0) {
-                biggestParrot = parrots.get(z);
-            }
-            if (biggestParrot.getHeight() < parrots.get(z).getHeight()) {
-                biggestParrot = parrots.get(z);
-            }
-        }
-        System.out.println("The biggest parrot is: " + biggestParrot.name);
-
-        Parrot mostBeautifulParrot = new Parrot();
-        for (int s = 0; s < parrots.size(); s++) {
-            if (s == 0) {
-                mostBeautifulParrot = parrots.get(s);
-            }
-            if (mostBeautifulParrot.getWeight() < parrots.get(s).getWeight()) {
-                mostBeautifulParrot = parrots.get(s);
-            }
-        }
-        System.out.println("The most beautiful parrot is: " + mostBeautifulParrot.name);
         System.out.println("\n");
 
         menu();
